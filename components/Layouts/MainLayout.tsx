@@ -1,9 +1,15 @@
-import React from "react";
+import React, { ReactNode } from "react";
+import HeaderOne from "../Header/HeaderOne";
 
-const MainLayout = (props: any) => {
+type MainLayoutProps = {
+  children: ReactNode;
+};
+
+const MainLayout = ({ children }: MainLayoutProps) => {
   return (
     <>
-      <main>{props.children}</main>
+      <HeaderOne />
+      <main>{children}</main>
     </>
   );
 };
