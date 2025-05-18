@@ -18,6 +18,9 @@ const HeroVideo = () => {
     setIsPlaying(!isPlaying);
   };
 
+  // Simulate props/condition to toggle between image or text
+  const showImage = false; // Set false to show title/desc instead
+
   return (
     <section className="hero-video">
       <video
@@ -31,11 +34,24 @@ const HeroVideo = () => {
       />
 
       <div className="hero-video__overlay">
-        <img
-          src="/women-hero-text.svg"
-          alt="Vital is an icon - 6.9 million of you agree"
-          className="hero-video__title-image"
-        />
+        {showImage ? (
+          <img
+            src="/women-hero-text.svg"
+            alt="Vital is an icon - 6.9 million of you agree"
+            className="hero-video__title-image"
+          />
+        ) : (
+          <>
+            <h2 className="hero-video__heading">
+              Vital Is An Icon. Over 6.9 million customers agree — elevate your
+              fit.
+            </h2>
+            <p className="hero-video__description">
+              Over 6.9 million customers agree — elevate your fit.
+            </p>
+          </>
+        )}
+
         <a href="#contact" className="hero-video__cta">
           Shop Now
         </a>
