@@ -19,7 +19,7 @@ const HeroVideo = () => {
   };
 
   // Simulate props/condition to toggle between image or text
-  const showImage = false; // Set false to show title/desc instead
+  const showImage = true; // Set false to show title/desc instead
 
   return (
     <section className="hero-video">
