@@ -41,16 +41,40 @@ const products = [
     price: "34.99",
     sizes: ["S", "M", "L"],
   },
+  {
+    id: 3,
+    image: "/img-card-1.jpg",
+    tag: "Sale",
+    title: "Running Shoes",
+    description: "Comfortable shoes designed for running and training.",
+    price: "79.99",
+    sizes: ["7", "8", "9", "10", "11"],
+  },
+  {
+    id: 4,
+    image: "/img-card-1.jpg",
+    tag: "Limited Edition",
+    title: "Hooded Jacket",
+    description: "Stylish jacket with a warm hood for chilly days.",
+    price: "89.99",
+    sizes: ["M", "L", "XL"],
+  },
 ];
 
 const CardsWithModal = () => {
   const [activeModal, setActiveModal] = useState<number | null>(null);
+  const [selectedSize, setSelectedSize] = useState<string | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
   const scroll = (dir: "left" | "right") => {
     if (!containerRef.current) return;
     const offset = dir === "left" ? -340 : 340;
     containerRef.current.scrollBy({ left: offset, behavior: "smooth" });
+  };
+
+  const handleModalClose = () => {
+    setActiveModal(null);
+    setSelectedSize(null);
   };
 
   return (
@@ -64,7 +88,6 @@ const CardsWithModal = () => {
             aria-label="Scroll left"
           >
             <svg
-              className="cards-section__icon"
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
               width="20"
@@ -74,14 +97,12 @@ const CardsWithModal = () => {
               <path d="M15.41 7.41 14 6l-6 6 6 6 1.41-1.41L10.83 12z" />
             </svg>
           </button>
-
           <button
             className="cards-section__control"
             onClick={() => scroll("right")}
             aria-label="Scroll right"
           >
             <svg
-              className="cards-section__icon"
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
               width="20"
@@ -109,7 +130,6 @@ const CardsWithModal = () => {
               onClick={() => setActiveModal(card.id)}
             >
               <svg
-                className="card__icon"
                 xmlns="http://www.w3.org/2000/svg"
                 width="16"
                 height="16"
@@ -125,12 +145,9 @@ const CardsWithModal = () => {
       </div>
 
       {activeModal && (
-        <div className="modal" onClick={() => setActiveModal(null)}>
+        <div className="modal" onClick={handleModalClose}>
           <div className="modal__content" onClick={(e) => e.stopPropagation()}>
-            <button
-              className="modal__close-icon"
-              onClick={() => setActiveModal(null)}
-            >
+            <button className="modal__close-icon" onClick={handleModalClose}>
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                 <path d="M18.3 5.71 12 12l6.3 6.29-1.42 1.42L12 13.41l-6.29 6.3-1.42-1.42L10.59 12 4.29 5.71 5.7 4.29 12 10.59l6.29-6.3z" />
               </svg>
@@ -144,14 +161,19 @@ const CardsWithModal = () => {
                   <div className="modal__product-image">
                     <img src={product.image} alt={product.title} />
                   </div>
-
                   <div className="modal__product-info">
                     <span className="modal__tag">{product.tag}</span>
                     <h4 className="modal__title">{product.title}</h4>
                     <p className="modal__description">{product.description}</p>
                     <div className="modal__price">${product.price}</div>
-
-                    <select className="modal__select">
+                    <select
+                      className="modal__select"
+                      value={selectedSize ?? ""}
+                      onChange={(e) => setSelectedSize(e.target.value)}
+                    >
+                      <option value="" disabled>
+                        Select Size
+                      </option>
                       {product.sizes.map((size) => (
                         <option key={size} value={size}>
                           {size}
@@ -163,7 +185,11 @@ const CardsWithModal = () => {
               ))}
             </div>
 
-            <button className="modal__add-to-cart">Add to Cart</button>
+            <div className="modal__footer">
+              <button className="modal__add-to-cart" disabled={!selectedSize}>
+                Add to Cart
+              </button>
+            </div>
           </div>
         </div>
       )}
