@@ -3,6 +3,7 @@ import styles from "./page.module.css";
 import HeroVideo from "@/components/Hero/HeroVideo";
 import CardsWithButton from "@/components/FeatureSections/CardsWithButton";
 import CardsProducts from "@/components/FeatureSections/CardsProducts";
+import CardsWithButtonTwo from "@/components/FeatureSections/CardsWithButtonTwo";
 
 export default function Home() {
   return (
@@ -12,6 +13,7 @@ export default function Home() {
         <CardsWithModal />
         <CardsWithButton />
         <CardsProducts />
+        <CardsWithButtonTwo />
       </main>
     </div>
   );
