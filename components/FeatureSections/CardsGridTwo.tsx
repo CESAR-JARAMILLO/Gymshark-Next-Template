@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
-import "./CardsWithButtonTwo.scss";
+import "./CardsGrid.scss";
 
 type Card = {
   id: number;
@@ -25,7 +25,7 @@ const mensCards: Card[] = [
   { id: 8, image: "/lifting-men.png", title: "Mens Hoodie" },
 ];
 
-const CardsWithButtonTwo = () => {
+const CardsGridTwo = () => {
   const [activeCategory, setActiveCategory] = useState<"womens" | "mens">(
     "womens"
   );
@@ -33,7 +33,7 @@ const CardsWithButtonTwo = () => {
   const cards = activeCategory === "womens" ? womensCards : mensCards;
 
   return (
-    <section className="cards-grid grid--4">
+    <section className="cards-grid cards-grid--overlay-bottom-left grid--4 cards-grid--scroll-sm">
       <h2 className="cards-grid__title">HOT RIGHT NOW</h2>
 
       <div className="cards-grid__toggle">
@@ -65,9 +65,10 @@ const CardsWithButtonTwo = () => {
               height={240}
               className="cards-grid__image"
             />
-            <h3 className="cards-grid__name">{card.title}</h3>
-            <p className="cards-grid__desc">{card.description}</p>
-            <button className="cards-grid__button">Shop Now</button>
+            <div className="cards-grid__body">
+              <h3 className="cards-grid__name">{card.title}</h3>
+              <button className="cards-grid__button">Shop Now</button>
+            </div>
           </div>
         ))}
       </div>
@@ -75,4 +76,4 @@ const CardsWithButtonTwo = () => {
   );
 };
 
-export default CardsWithButtonTwo;
+export default CardsGridTwo;
