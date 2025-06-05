@@ -33,7 +33,7 @@ const CardsGridOne = () => {
   const cards = activeCategory === "womens" ? womensCards : mensCards;
 
   return (
-    <section className="cards-grid grid--4 cards-grid--scroll-sm">
+    <section className="cards-grid grid--4">
       <h2 className="cards-grid__title">HOT RIGHT NOW</h2>
 
       <div className="cards-grid__toggle">
